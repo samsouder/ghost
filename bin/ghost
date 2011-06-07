@@ -105,8 +105,10 @@ else
       begin
         File.foreach(ARGV[1]) do |line|
           host_infos = line.strip.split(' ', 2)
-          host = Host.add(*host_infos)
-          puts "  [Adding] #{host.name} -> #{host.ip}"
+          if host_infos.count == 2 and host_infos.first != '#'
+            host = Host.add(*host_infos)
+            puts "  [Adding] #{host.name} -> #{host.ip}"
+          end
         end
         exit 0
       rescue
